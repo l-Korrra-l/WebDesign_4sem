@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Document</title>
+   	
+    	<script language="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
+    	<script language="JavaScript" type="text/javascript" src="js/CometServerApi.js"></script>
+</head>
+
+    <body>
+
+        <div id="chat"></div> 
+
+        <textarea id="message" placeholder="Type something here"></textarea>
+        <br>
+        
+        <input type="button" onclick="SendMsg()" value="Send">
+        <input type="button" onclick="Stop()" value="Stop">
+
+        <div id="response"></div>
+        
+
+
+        <script>
+
+            var buf="hi";
+            $("#chat").html("<p><b>message: </b>" + buf + "</p>");
+            function SendMsg() {
+
+                var text = $("#message").val();
+                $("#message").val("");  
+
+                if (buf!=text)
+               { 
+                    $("#chat").html("<p><b>message: </b>" + text + "</p>");
+                    buf=text;
+                }
+               else {$("#chat").append("<p><b> wasnt changed</p>");}
+                 
+                CometServer().web_pipe_send("web_chat_pipe", {"text":text});
+
+            }
+             
+            $(document).ready(function() {
+                CometServer().start({dev_id:15,user_id:"ya"});
+                 
+                CometServer().subscription("web_chat_pipe", function(msg)
+                {
+                    console.log(msg);
+                    if (buf!=msg.data.text)
+                    { 
+                        $("#chat").html("<p><b> new message" + ": </b>" + msg.data.text + "</p>");
+                        buf=msg.data.text;
+                    } 
+                     else  
+                     {$("#chat").append("<p><b> wasnt changed</p>");}
+                });
+             
+                CometServer().subscription("#web_chat_pipe", function(p)
+                {
+                    console.log(p);
+                });
+            });
+
+            function Stop()
+            {
+                CometServer().stop({dev_id:15,user_id:"ya"});
+            }
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>lab06</title>
+   	
+    	<script language="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+
+    <body>
+        <div id="here"></div>
+        <div id="oh"></div>
+     
+
+
+        <script>
+//Преобразуйте значение JSON в строку и наоборот. Создать массив из слов и вывести слово, которое начинается на букву "А".
+jQuery(document).ready(function($) {
+	var json = {
+		"Names": [
+			"Ann",
+			"Max",
+			"Kate",
+            "Lilit",
+            "Andrew"
+		]
+	}
+    var jsonStr = JSON.stringify(json);
+    var jsonObj = $.parseJSON(jsonStr);
+	$("#here").html("string: "+jsonStr+"</br>type: "+typeof(jsonStr)+"</br>type: "+typeof(jsonObj));
+
+    var res="Words with A: ";
+	for (var i = 0; i < jsonObj.Names.length; i++) {
+		if ( jsonObj.Names[i].substr(0,1) == "A" ){
+			res+=jsonObj.Names[i]+" ";
+		}
+	}
+    $("#oh").html(res);
+});
+ 
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>lab07</title>
+   	
+    	<script language="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="data/books.json"></script>
+</head>
+
+    <body>
+        <div id="here"></div>
+        <div id="oh"></div>
+     
+        <script>
+        //Создайте файл JSON. Выведите содержимое 6-го, 7-го и 8-го тэга title на страницу.
+        jQuery(document).ready(function($) 
+        {
+            xhttp=new XMLHttpRequest();
+            xhttp.open('GET','data/books.json',true);
+            xhttp.send();
+            xhttp.onreadystatechange=function()
+        {
+        if (xhttp.readyState==4)
+        {
+            var json=eval( '('+xhttp.responseText+')' );
+            $("#here").html("6: "+json.bookbase[5].title+"</br>7: "+json.bookbase[6].title+"</br>8: "+json.bookbase[7].title);
+        }
+        }
+        });
+        </script>
+    </body>
+</html>

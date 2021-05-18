@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>lab09</title>
+   	
+    	<script language="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="data/books.json"></script>
+</head>
+
+    <body>
+        <div id="here"></div>
+        <div id="oh"></div>
+     
+        <script>
+        //	Создайте массив, состоящий из целых чисел. Преобразуйте все числа в двоичную систему счисления. 
+        //Выведите результат на страницу. Расшифруйте массив. Выведите результат на страницу. 
+    jQuery(document).ready(function($) {	
+	var num = [1,2,3,4,5];
+    var res="Binary:</br>";
+	for (var i = 0; i < num.length; i++) {
+		res+=num[i].toString(2)+"</br>";
+        num[i]=num[i].toString(2);
+	}
+    $("#here").html(res);
+    var ress="Oct:</br>";
+	for (var i = 0; i < num.length; i++) {
+		ress+=parseInt(num[i], 2).toString()+"</br>";
+	}
+    $("#oh").html(ress);
+    });
+        </script>
+    </body>
+</html>
