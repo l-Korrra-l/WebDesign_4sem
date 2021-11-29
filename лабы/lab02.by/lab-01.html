@@ -1,0 +1,52 @@
+<!doctype html> 
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Лабораторная работа 1</title>
+        <link rel="shortcut icon" href="img/1.ico">
+    </head>
+    <body>
+        <script>
+            function first(dk)
+            {
+                var request=new XMLHttpRequest();
+                if (dk)
+                request.open("POST", "http://localhost/in.php");
+                else request.open("POST", "http://localhost/inn.php");
+                request.setRequestHeader("Content-type", "application/json ; charset=utf-8");
+                request.send(null);
+                request.addEventListener("readystatechange", function()
+            {
+                if (request.readyState==4 && request.status==200)
+                {    
+                  document.getElementById('here').innerHTML+="==============================================</br>|";
+                  document.getElementById('here').innerHTML+="-async response: "+request.responseText+" |</br>";
+                }
+            })
+        }
+
+        function syn(dk)
+            {
+                var request=new XMLHttpRequest();
+                if (dk)
+                request.open("POST", "http://localhost/in.php",false);
+                else request.open("POST", "http://localhost/inn.php", false);
+                request.setRequestHeader("Content-type", "application/json ; charset=utf-8");
+                request.send(null);
+                if (request.readyState==4 && request.status==200)
+                {    
+                  document.getElementById('here').innerHTML+="==============================================</br>|";
+                  document.getElementById('here').innerHTML+="-sync response: "+request.responseText+" |</br>";
+                }
+
+        }
+        </script>
+        <button onclick="first(true)">async with delay</button>
+        <button onclick="first()">async</button>
+        <button onclick="syn(true)">sync with delay</button>
+        <button onclick="syn()">sync</button>
+        <button onclick="document.getElementById('here').innerHTML+='живем живем</br>'">click</button></br>
+
+        <div id="here"></div>
+    </body>
+</html>

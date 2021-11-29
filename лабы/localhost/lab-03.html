@@ -1,0 +1,39 @@
+<!doctype html> 
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Лабораторная работа 3</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <link rel="shortcut icon" href="img/3.ico">
+    </head>
+    <body>
+        <button class="button">click here, pls</button></br>
+        <script>
+            $("button").click(function(){
+            $.ajax
+            (
+                {
+                    url:"in.txt"
+                }
+            )
+            .done
+            (            
+                function(msg) {
+                alert(msg);
+                }
+            )
+            .fail(
+                function () {
+                        alert("Что-то в этой жизни пошло не так..."); 
+                }
+            )
+            .always(
+                function()
+                {
+                    alert("оно живое!"); 
+                }
+            );
+        });
+        </script>
+    </body>
+</html>
